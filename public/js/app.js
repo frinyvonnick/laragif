@@ -2135,17 +2135,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  beforeCreate: function beforeCreate() {
-    var _this = this;
-
-    axios.get('/').then(function (response) {
-      _this.gifs = response.data;
-    });
-  },
-  data: function data() {
-    return {
-      gifs: null
-    };
+  props: {
+    gifs: {
+      type: Array,
+      default: []
+    }
   }
 });
 
@@ -32250,7 +32244,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     return _c('img', {
       staticClass: "gif",
       attrs: {
-        "src": gif.url
+        "src": gif.images.fixed_width.url
       }
     })
   }))
