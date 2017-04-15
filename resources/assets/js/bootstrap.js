@@ -44,13 +44,3 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
-
-/*
- * Setup axios mock
- */
-const MockAdapter = require('axios-mock-adapter')
-const mock = new MockAdapter(axios)
-mock.onGet('/').reply(200, [
-    { url: 'http://media4.giphy.com/media/l44QqG8T4GUlMnwwo/200.gif' },
-    { url: 'https://media4.giphy.com/media/S9NSUUTNtV2dG/200.gif' },
-])
