@@ -19,8 +19,5 @@
 		<application :gifs="{{json_encode($gifs)}}"></application>
 	</div>
 	<script src="/js/app.js"></script>
-	<!--@foreach ($gifs as $gif)
-		<img src="{{ $gif->images->fixed_width->url }}" />
-	@endforeach-->
 </body>
 </html>
