@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\GiphyRepository;
+use App\Interfaces\GiphyInterface;
 
 class GifsController extends Controller
 {
@@ -11,20 +11,20 @@ class GifsController extends Controller
 
     private $giphy;
 
-    public function __construct(GiphyRepository $giphy)
+    public function __construct(GiphyInterface $giphy)
     {
         $this->giphy = $giphy;
     }
 
     public function trending(int $offset)
     {
-        return json_decode($this->giphy->trending(self::LIMIT, $offset))->data;
+        return $this->giphy->trending(self::LIMIT, $offset * self::LIMIT);
     }
 
     public function index()
     {
         return view('index', [
-            'gifs' => json_decode($this->giphy->trending(self::LIMIT, 0))->data
+            'gifs' => $this->giphy->trending(self::LIMIT, 0)
         ]);
     }
 }
