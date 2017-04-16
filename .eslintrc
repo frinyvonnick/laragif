@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "airbnb"
+  ],
+  "plugins": [
+    "vue"
+  ],
+  "rules": {
+    "semi": ["error", "never"],
+    "vue/jsx-uses-vars": 2
+  },
+  "globals": {
+    "Vue": true,
+    "axios": false
+  },
+  "env": {
+    "browser": true
+  }
+}
