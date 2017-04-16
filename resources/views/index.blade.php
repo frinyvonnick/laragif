@@ -9,7 +9,7 @@
 </head>
 <body>
 	@foreach ($gifs as $gif)
-		<img src="{{ $gif->images->fixed_width->url }}" />
+		<img src="{{ $gif->url }}" />
 	@endforeach
 </body>
 </html>

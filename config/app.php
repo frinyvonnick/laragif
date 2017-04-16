@@ -181,6 +181,7 @@ return [
          * Custom Providers
          */
         Kozz\Laravel\Providers\Guzzle::class,
+        App\Providers\GiphyServiceProvider::class,
 
     ],
 
@@ -237,5 +238,11 @@ return [
         'Guzzle' => Kozz\Laravel\Facades\Guzzle::class,
 
     ],
+
+    'guzzle' => [
+        'request.options' => [
+            'exceptions' => false,
+        ]
+    ]
 
 ];
