@@ -1,6 +1,6 @@
 <template>
   <div>
-    <img class="gif" v-for="gif in gifs" :src="gif.images.fixed_width.url" />
+    <img class="gif" v-for="gif in gifs" :src="gif.url" />
   </div>
 </template>
 
