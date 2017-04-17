@@ -21,6 +21,10 @@ class GifsController extends Controller
         return $this->giphy->trending(self::LIMIT, $offset * self::LIMIT);
     }
 
+    public function search(string $term, int $offset) {
+      return $this->giphy->search($term, self::LIMIT, $offset * self::LIMIT);
+    }
+
     public function index()
     {
         return view('index', [

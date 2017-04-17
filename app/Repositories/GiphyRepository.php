@@ -31,4 +31,22 @@ class GiphyRepository implements GiphyInterface
             ];
         }, $data);
     }
+
+    public function search(string $term, int $limit, int $offset)
+    {
+        $response = Guzzle::get(self::GIPHY_API . 'search?api_key=' . self::API_KEY . '&q=' . $term . '&limit=' . $limit . '&offset=' . $offset);
+        $data = json_decode($response->getBody())->data;
+
+        return $this->extractResult($response);
+    }
+
+    private function extractResult($response) {
+      $data = json_decode($response->getBody())->data;
+
+      return array_map(function ($datum) {
+          return (object)[
+              'url' => $datum->images->fixed_width->url
+          ];
+      }, $data);
+    }
 }
