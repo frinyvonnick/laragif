@@ -2,13 +2,14 @@
 namespace App\Repositories;
 
 use App\Interfaces\GiphyInterface;
+use App\Http\Controllers\GifsController;
 
 class MockGiphyRepository implements GiphyInterface
 {
 
     public function trending(int $limit, int $offset)
     {
-        $file = base_path() . '/resources/mocks/trending/' . $offset . '.json';
+        $file = base_path() . '/resources/mocks/trending/' . ($offset / GifsController::LIMIT) . '.json';
 
         if (file_exists($file)) {
             return json_decode(file_get_contents($file));
