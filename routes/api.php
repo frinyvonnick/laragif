@@ -18,3 +18,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('trending/{offset}', 'GifsController@trending');
+Route::get('search/{term}/{offset}', 'GifsController@search');
