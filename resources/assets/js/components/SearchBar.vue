@@ -11,15 +11,13 @@ import debounce from 'lodash/debounce'
 export default {
   data() {
     return {
-      search: 'foo',
-      maxRating: null,
+      search: '',
     }
   },
   watch: {
-    search: debounce((newValue) => {
+    search: debounce(function startSearch(newValue) {
       if (newValue !== '') {
-        axios.get(`/api/search/${newValue}/0`)
-          .then(response => console.log(response))
+        this.$emit('search', newValue)
       }
     }, 500),
   },
