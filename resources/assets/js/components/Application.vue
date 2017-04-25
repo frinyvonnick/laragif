@@ -34,6 +34,7 @@ export default {
       return axios.get(`${this.currentEndPoint}${this.currentOffset}`)
     },
     search(searchTerm) {
+      this.currentOffset = 0
       this.currentEndPoint = `/api/search/${searchTerm}/`
       this.currentGifs = null
       this.fetch()
