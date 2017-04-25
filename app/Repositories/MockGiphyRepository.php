@@ -28,6 +28,6 @@ class MockGiphyRepository implements GiphyInterface
       }
 
       // Fallback on first json mock if we don't find a mock file
-      return json_decode(file_get_contents(base_path() . '/resources/mocks/search/' . $term . '/0.json'));
+      return json_decode(file_get_contents(base_path() . '/resources/mocks/search/cat/0.json'));
     }
 }
