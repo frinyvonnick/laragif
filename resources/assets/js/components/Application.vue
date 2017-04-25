@@ -1,9 +1,9 @@
 <template>
   <div>
-    <search-bar v-on:search="search"></search-bar>
+    <search-bar @search="search"></search-bar>
     <search-result :gifs="currentGifs"></search-result>
     <spinner v-if="loading"></spinner>
-    <load-more-button v-on:loadMore="onLoadMore"></load-more-button>
+    <load-more-button @loadMore="onLoadMore"></load-more-button>
   </div>
 </template>
 
