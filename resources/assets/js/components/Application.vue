@@ -5,12 +5,6 @@
   </div>
 </template>
 
-<style scoped>
-.gif {
-  padding: 8px;
-}
-</style>
-
 <script>
 import SearchResult from './SearchResult.vue'
 import SearchBar from './SearchBar.vue'
@@ -31,11 +25,9 @@ export default {
   },
   methods: {
     search(searchTerm) {
-      this.currentGifs = []
-      console.log(`starting search for ${searchTerm}`)
+      this.currentGifs = null
       axios.get(`/api/search/${searchTerm}/0`)
         .then((response) => {
-          console.log(`received result for ${searchTerm}`)
           this.currentGifs = response.data
         })
     },

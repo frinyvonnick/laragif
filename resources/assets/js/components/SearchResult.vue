@@ -24,7 +24,7 @@ export default {
   },
   computed: {
     loaded() {
-      return this.gifs.length > 0
+      return this.gifs !== null
     },
   },
 }
