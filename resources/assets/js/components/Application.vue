@@ -33,23 +33,19 @@ export default {
     fetch() {
       return axios.get(`${this.currentEndPoint}${this.currentOffset}`)
     },
-    search(searchTerm) {
+    async search(searchTerm) {
       this.currentOffset = 0
       this.currentEndPoint = `/api/search/${searchTerm}/`
       this.currentGifs = null
-      this.fetch()
-        .then((response) => {
-          this.currentGifs = response.data
-        })
+      const response = await this.fetch()
+      this.currentGifs = response.data
     },
-    onLoadMore() {
+    async onLoadMore() {
       this.currentOffset++
       this.loading = true
-      this.fetch()
-        .then((response) => {
-          this.loading = false
-          this.currentGifs = [...this.currentGifs, ...response.data]
-        })
+      const response = await this.fetch()
+      this.loading = false
+      this.currentGifs = [...this.currentGifs, ...response.data]
     }
   },
 }
