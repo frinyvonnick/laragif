@@ -3,7 +3,7 @@
     <search-bar @search="search"></search-bar>
     <search-result :gifs="currentGifs"></search-result>
     <spinner v-if="loading"></spinner>
-    <button @click="loadMore">Afficher plus</button>
+    <button :disabled="loading" @click="loadMore">Afficher plus</button>
   </div>
 </template>
 
