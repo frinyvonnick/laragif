@@ -3,18 +3,17 @@
     <search-bar @search="search"></search-bar>
     <search-result :gifs="currentGifs"></search-result>
     <spinner v-if="loading"></spinner>
-    <load-more-button @loadMore="onLoadMore"></load-more-button>
+    <button @click="loadMore">Afficher plus</button>
   </div>
 </template>
 
 <script>
 import SearchResult from './SearchResult.vue'
 import SearchBar from './SearchBar.vue'
-import LoadMoreButton from './LoadMoreButton.vue'
 import Spinner from './Spinner.vue'
 
 export default {
-  components: { SearchResult, SearchBar, LoadMoreButton, Spinner },
+  components: { SearchResult, SearchBar, Spinner },
   props: {
     gifs: {
       type: Array,
@@ -40,7 +39,7 @@ export default {
       const response = await this.fetch()
       this.currentGifs = response.data
     },
-    async onLoadMore() {
+    async loadMore() {
       this.currentOffset++
       this.loading = true
       const response = await this.fetch()
