@@ -19,6 +19,10 @@ export default {
       type: Array,
       default: [],
     },
+    authenticatedUser: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   data() {
     return {

@@ -11,4 +11,6 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', 'GifsController@index');
