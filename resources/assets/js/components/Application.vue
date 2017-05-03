@@ -1,7 +1,7 @@
 <template>
   <div>
     <search-bar @search="search"></search-bar>
-    <search-result :gifs="currentGifs"></search-result>
+    <search-result @toggle="toggleStar" :gifs="currentGifs"></search-result>
   </div>
 </template>
 
@@ -29,6 +29,12 @@ export default {
       axios.get(`/api/search/${searchTerm}/0`)
         .then((response) => {
           this.currentGifs = response.data
+        })
+    },
+    toggleStar(id) {
+      axios.get(`/api/star/${id}`)
+        .then((response) => {
+          this.currentGifs.find(gif => gif.id === id).starred = response.data.starred
         })
     },
   },

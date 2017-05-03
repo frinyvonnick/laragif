@@ -13,7 +13,7 @@ class GiphyRepository implements GiphyInterface
     public static function ping()
     {
         try {
-            Guzzle::get(self::GIPHY_API . 'random?api_key=' . self::API_KEY, ['connect_timeout' => 0.1]);
+            Guzzle::get(self::GIPHY_API . 'random?api_key=' . self::API_KEY, ['connect_timeout' => 10]);
             return true;
         } catch (\GuzzleHttp\Exception\ConnectException $e) {
             return false;
@@ -39,6 +39,7 @@ class GiphyRepository implements GiphyInterface
 
       return array_map(function ($datum) {
           return (object)[
+              'id' => $datum->id,
               'url' => $datum->images->fixed_width->url
           ];
       }, $data);
