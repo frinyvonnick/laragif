@@ -33,7 +33,7 @@ class GifsController extends Controller
     public function star($id)
     {
         $starred = true;
-        $star = Star::where('user_id', 1)
+        $star = Star::where('user_id', 1) // TODO retrieve logged user_id
                     ->where('gif_id', $id)
                     ->first();
 
