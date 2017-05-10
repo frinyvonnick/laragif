@@ -1,6 +1,6 @@
 <template>
-  <div v-if="loaded">
-    <gif v-for="gif in gifs" :key="gif.id" :src="gif.url" @click="toggle(gif.id)" :starred="gif.starred"></gif>
+  <div class="search-result-container" v-if="loaded">
+    <gif v-for="gif in gifs" :key="gif.id" :starEnabled="starEnabled" :src="gif.url" @click="toggle(gif.id)" :starred="gif.starred"></gif>
   </div>
   <spinner v-else></spinner>
 </template>
@@ -8,6 +8,10 @@
 <style scoped>
 .gif {
   padding: 8px;
+}
+.search-result-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>
 
@@ -22,6 +26,7 @@ export default {
       type: Array,
       default: [],
     },
+    starEnabled: Boolean,
   },
   computed: {
     loaded() {

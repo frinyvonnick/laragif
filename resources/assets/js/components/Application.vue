@@ -1,7 +1,7 @@
 <template>
   <div>
     <search-bar @search="search"></search-bar>
-    <search-result @toggle="toggleStar" :gifs="currentGifs"></search-result>
+    <search-result @toggle="toggleStar" :gifs="currentGifs" :starEnabled="isConnected" ></search-result>
     <spinner v-if="loading"></spinner>
     <button :disabled="loading" @click="loadMore">Afficher plus</button>
   </div>
@@ -23,6 +23,11 @@ export default {
       type: Object,
       default: () => ({}),
     },
+  },
+  computed: {
+    isConnected() {
+      return !!this.authenticatedUser.id
+    }
   },
   data() {
     return {

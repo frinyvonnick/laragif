@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Interfaces\GiphyInterface;
 use App\Star;
 use App\Gif;
+use Illuminate\Support\Facades\Auth;
 
 class GifsController extends Controller
 {
@@ -33,13 +34,13 @@ class GifsController extends Controller
     public function star($id)
     {
         $starred = true;
-        $star = Star::where('user_id', 1) // TODO retrieve logged user_id
+        $star = Star::where('user_id', Auth::user()->id)
                     ->where('gif_id', $id)
                     ->first();
 
         if(is_null($star)) {
             $star = new Star([
-                'user_id' => 1, // TODO retrieve logged user_id
+                'user_id' => Auth::user()->id,
                 'gif_id' => $id
             ]);
 

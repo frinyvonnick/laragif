@@ -13,7 +13,7 @@ class GiphyRepository implements GiphyInterface
     public static function ping()
     {
         try {
-            Guzzle::get(self::GIPHY_API . 'random?api_key=' . self::API_KEY, ['connect_timeout' => 0.1]);
+            Guzzle::get(self::GIPHY_API . 'random?api_key=' . self::API_KEY, ['connect_timeout' => 1]);
             return true;
         } catch (\GuzzleHttp\Exception\ConnectException $e) {
             return false;
