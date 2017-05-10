@@ -27,7 +27,7 @@ class GifsController extends Controller
     public function search(string $term, int $offset)
     {
       $gifs = $this->giphy->search($term, self::LIMIT, $offset * self::LIMIT);
-      return $this->$this->convertToGifArray($gifs);
+      return $this->convertToGifArray($gifs);
     }
 
     public function star($id)
