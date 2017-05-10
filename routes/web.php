@@ -14,4 +14,3 @@
 Auth::routes();
 
 Route::get('/', 'GifsController@index');
-Route::middleware('auth')->get('/api/star/{url}', 'GifsController@star');

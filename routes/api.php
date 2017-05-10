@@ -13,10 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::get('trending/{offset}', 'GifsController@trending');
 Route::get('search/{term}/{offset}', 'GifsController@search');
-//Route::get('star/{url}', 'GifsController@star')->middleware('auth.basic');
+Route::middleware('auth')->get('/star/{url}', 'GifsController@star');
