@@ -1,7 +1,7 @@
 <template>
   <div>
     <search-bar @search="search"></search-bar>
-    <search-result :gifs="currentGifs"></search-result>
+    <search-result @toggle="toggleStar" :gifs="currentGifs" :starEnabled="isConnected" ></search-result>
     <spinner v-if="loading"></spinner>
     <button :disabled="loading" @click="loadMore">Afficher plus</button>
   </div>
@@ -24,6 +24,11 @@ export default {
       default: () => ({}),
     },
   },
+  computed: {
+    isConnected() {
+      return !!this.authenticatedUser.id
+    }
+  },
   data() {
     return {
       currentOffset: 0,
@@ -42,6 +47,14 @@ export default {
       this.currentGifs = null
       const response = await this.fetch()
       this.currentGifs = response.data
+    },
+    toggleStar(id) {
+      if (this.isConnected) {
+        axios.get(`/api/star/${id}`)
+          .then((response) => {
+            this.currentGifs.find(gif => gif.id === id).starred = response.data.starred
+          })
+      }
     },
     async loadMore() {
       this.currentOffset++
