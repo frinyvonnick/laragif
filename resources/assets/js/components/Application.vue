@@ -49,10 +49,12 @@ export default {
       this.currentGifs = response.data
     },
     toggleStar(id) {
-      axios.get(`/api/star/${id}`)
-        .then((response) => {
-          this.currentGifs.find(gif => gif.id === id).starred = response.data.starred
-        })
+      if (this.isConnected) {
+        axios.get(`/api/star/${id}`)
+          .then((response) => {
+            this.currentGifs.find(gif => gif.id === id).starred = response.data.starred
+          })
+      }
     },
     async loadMore() {
       this.currentOffset++
