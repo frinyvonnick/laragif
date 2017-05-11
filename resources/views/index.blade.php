@@ -7,4 +7,6 @@
 			:authenticated-user="{{ Auth::guest() ? '{}' : json_encode(Auth::user()) }}"
 		></application>
 	</div>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 @endsection
