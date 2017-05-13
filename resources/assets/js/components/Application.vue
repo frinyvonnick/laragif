@@ -1,19 +1,17 @@
 <template>
   <div>
-    <search-bar @search="search"></search-bar>
-    <search-result @toggle="toggleStar" :gifs="currentGifs" :starEnabled="isConnected" ></search-result>
+    <gifs @loadMore="onLoadMore" :loading="loading" :gifs="sharedState.gifs"></gifs>
     <spinner v-if="loading"></spinner>
-    <button :disabled="loading" @click="loadMore">Afficher plus</button>
   </div>
 </template>
 
 <script>
-import SearchResult from './SearchResult.vue'
-import SearchBar from './SearchBar.vue'
+import Gifs from './Gifs.vue'
 import Spinner from './Spinner.vue'
+import store from '../store.js'
 
 export default {
-  components: { SearchResult, SearchBar, Spinner },
+  components: { Gifs, Spinner },
   props: {
     gifs: {
       type: Array,
@@ -23,45 +21,32 @@ export default {
       type: Object,
       default: () => ({}),
     },
-  },
-  computed: {
-    isConnected() {
-      return !!this.authenticatedUser.id
+    endpoint: {
+      type: String,
+      required: true,
     }
   },
   data() {
     return {
-      currentOffset: 0,
-      currentEndPoint: `/api/trending/`,
-      currentGifs: this.gifs,
+      sharedState: store.state,
       loading: false,
     }
   },
+  beforeCreate() {
+    store.set('gifs', this.$options.propsData.gifs)
+    store.set('endpoint', this.$options.propsData.endpoint)
+    store.set('user', this.$options.propsData.authenticatedUser)
+  },
   methods: {
     fetch() {
-      return axios.get(`${this.currentEndPoint}${this.currentOffset}`)
+      return axios.get(`${this.sharedState.endpoint}${this.sharedState.offset}`)
     },
-    async search(searchTerm) {
-      this.currentOffset = 0
-      this.currentEndPoint = `/api/search/${searchTerm}/`
-      this.currentGifs = null
-      const response = await this.fetch()
-      this.currentGifs = response.data
-    },
-    toggleStar(id) {
-      if (this.isConnected) {
-        axios.get(`/api/star/${id}`)
-          .then((response) => {
-            this.currentGifs.find(gif => gif.id === id).starred = response.data.starred
-          })
-      }
-    },
-    async loadMore() {
-      this.currentOffset++
+    async onLoadMore() {
+      store.set('offset', this.sharedState.offset + 1)
       this.loading = true
       const response = await this.fetch()
       this.loading = false
-      this.currentGifs = [...this.currentGifs, ...response.data]
+      store.set('gifs', [...this.sharedState.gifs, ...response.data])
     }
   },
 }

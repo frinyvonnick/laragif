@@ -1,4 +1,5 @@
 import Application from './components/Application.vue'
+import SearchBar from './components/SearchBar.vue'
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -15,5 +16,5 @@ import './bootstrap'
  */
 new Vue({ // eslint-disable-line no-new
   el: '#app',
-  components: { Application },
+  components: { Application, SearchBar },
 })

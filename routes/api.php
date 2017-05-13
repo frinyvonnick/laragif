@@ -13,6 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('trending/{offset}', 'GifsController@trending');
-Route::get('search/{term}/{offset}', 'GifsController@search');
-Route::middleware('auth')->get('/star/{url}', 'GifsController@star');
+Route::get('trending/{offset}', 'TrendingController@trending');
+Route::get('search/{term}/{offset}', 'SearchController@search');
+Route::middleware('auth')->get('/star/{url}', 'FavoritesController@star');

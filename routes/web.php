@@ -13,4 +13,5 @@
 
 Auth::routes();
 
-Route::get('/', 'GifsController@index');
+Route::get('/', 'TrendingController@index');
+Route::get('/search/{search}', 'SearchController@index');
