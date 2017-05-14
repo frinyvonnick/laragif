@@ -15,3 +15,4 @@ Auth::routes();
 
 Route::get('/', 'TrendingController@index');
 Route::get('/search/{search}', 'SearchController@index');
+Route::middleware('auth')->get('/favorites', 'FavoritesController@index');

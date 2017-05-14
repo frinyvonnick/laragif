@@ -26,11 +26,10 @@ class SearchController extends Controller
 
     public function index(string $term)
     {
-        $gifs = $this->giphy->search($term, self::LIMIT, 0);
         return view('index', [
             'endpoint' => '/api/search/' . $term . '/',
             'search' => $term,
-            'gifs' => convertToGifArray($gifs)
+            'gifs' => convertToGifArray($this->giphy->search($term, self::LIMIT, 0))
         ]);
     }
 }
