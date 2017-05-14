@@ -5,7 +5,7 @@
 </style>
 
 <template>
-  <div class="application container-fluid">
+  <div class="application container">
     <gifs @loadMore="onLoadMore" :loading="loading" :gifs="sharedState.gifs"></gifs>
     <spinner v-if="loading"></spinner>
   </div>
