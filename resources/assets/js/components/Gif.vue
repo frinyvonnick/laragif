@@ -3,6 +3,8 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    padding-bottom: 15px;
+    position: relative;
   }
 
   .star {
@@ -12,16 +14,18 @@
 
 <template>
   <div class="gif-container" @click="toggleStar">
-    <span v-if="isConnected" class="toggleStar">{{starred}}</span>
+    <star v-if="isConnected" :enabled="starred" ></star>
     <img :src="src" />
   </div>
 </template>
 
 <script>
 import store from '../store.js'
+import Star from './Star.vue'
 import pick from 'lodash/pick'
 
 export default {
+  components: { Star },
   props: {
     id: {
       type: String,

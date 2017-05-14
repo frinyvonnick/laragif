@@ -10,6 +10,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
+
     <!-- Scripts -->
     <script>
         window.Laravel = {!! json_encode([
@@ -27,13 +29,17 @@
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
-                <div class="navbar-searchbar">
-                  <search-bar :initial-search="{{ isset($search) ? json_encode($search) : "''" }}"></search-bar>
-                </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <a class="navbar-brand" href="{{ url('/favorites') }}">Favorites</a>
+                    <ul class="nav navbar-nav navbar-left">
+                      <li>
+                        <search-bar :initial-search="{{ isset($search) ? json_encode($search) : "''" }}"></search-bar>
+                      </li>
+                      <li>
+                        <a class="navbar-brand" href="{{ url('/favorites') }}">Favorites</a>
+                      </li>
+                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -66,8 +72,9 @@
                 </div>
             </div>
         </nav>
-
-        @yield('content')
+        <div class="content">
+          @yield('content')
+        </div>
     </div>
 
     <!-- Scripts -->

@@ -1,5 +1,11 @@
+<style scoped>
+  .application {
+    padding-bottom: 15px;
+  }
+</style>
+
 <template>
-  <div>
+  <div class="application container">
     <gifs @loadMore="onLoadMore" :loading="loading" :gifs="sharedState.gifs"></gifs>
     <spinner v-if="loading"></spinner>
   </div>

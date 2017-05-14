@@ -1,7 +1,8 @@
 <template>
-  <form>
-    <label for="search">Search</label>
-    <input type="text" name="search" v-model="sharedState.search" />
+  <form class="navbar-form">
+    <div class="form-group">
+      <input class="form-control" type="text" name="search" v-model="sharedState.search" placeholder="Search" />
+    </div>
   </form>
 </template>
 
