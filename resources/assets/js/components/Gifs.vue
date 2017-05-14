@@ -1,10 +1,50 @@
+<style scoped>
+  .masonry-layout {
+    column-count: 4;
+    column-gap: 0;
+  }
+  .masonry-layout__panel {
+    break-inside: avoid;
+  }
+  .masonry-layout__panel-content {
+    padding-left: 15px;
+  }
+  .masonry-layout__panel:first-child .masonry-layout__panel-content {
+    padding-left: 0;
+  }
+  .load-more {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 0;
+    font-size: 1.2em;
+    outline: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .load-more span {
+    margin-left: 15px;
+  }
+</style>
+
 <template>
   <div>
-    <div class="gifs-container" v-if="loaded">
-      <gif v-for="gif in gifs" :key="gif.id" :id="gif.id" :src="gif.url" :starred="gif.starred"></gif>
+    <div class="masonry-layout" v-if="loaded">
+      <div v-for="column in columns" class="masonry-layout__panel">
+        <div class="masonry-layout__panel-content">
+          <gif v-for="gif in column" :key="gif.id" :id="gif.id" :src="gif.url" :starred="gif.starred"></gif>
+        </div>
+      </div>
     </div>
-    <spinner v-else></spinner>
-    <button :disabled="loading" @click="loadMore">Afficher plus</button>
+
+    <div class="row">
+      <div class="col-lg-12">
+        <button class="btn btn-default load-more" :disabled="loading" @click="loadMore">
+          <spinner v-if="!loaded"></spinner>
+          <span>Afficher plus de gifs</span>
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -21,6 +61,7 @@
 <script>
 import Spinner from './Spinner.vue'
 import Gif from './Gif.vue'
+import chunk from 'lodash/chunk'
 
 export default {
   components: { Spinner, Gif },
@@ -38,6 +79,9 @@ export default {
     loaded() {
       return this.gifs !== null
     },
+    columns() {
+      return chunk(this.gifs, Math.floor(this.gifs.length / 4))
+    }
   },
   methods: {
     loadMore() {

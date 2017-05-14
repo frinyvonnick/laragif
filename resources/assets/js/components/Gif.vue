@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    padding-bottom: 15px;
   }
 
   .star {

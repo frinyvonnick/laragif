@@ -1,3 +1,19 @@
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
 body {
   background-color: #eee;
+}
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, .1);
+}
+
+.content {
+  padding-top: 70px;
 }
