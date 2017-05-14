@@ -1,15 +1,18 @@
 <template>
-  <div class="search-result-container" v-if="loaded">
-    <gif v-for="gif in gifs" :key="gif.id" :starEnabled="starEnabled" :src="gif.url" @click="toggle(gif.id)" :starred="gif.starred"></gif>
+  <div>
+    <div class="gifs-container" v-if="loaded">
+      <gif v-for="gif in gifs" :key="gif.id" :id="gif.id" :src="gif.url" :starred="gif.starred"></gif>
+    </div>
+    <spinner v-else></spinner>
+    <button :disabled="loading" @click="loadMore">Afficher plus</button>
   </div>
-  <spinner v-else></spinner>
 </template>
 
 <style scoped>
 .gif {
   padding: 8px;
 }
-.search-result-container {
+.gifs-container {
   display: flex;
   flex-wrap: wrap;
 }
@@ -26,7 +29,10 @@ export default {
       type: Array,
       default: [],
     },
-    starEnabled: Boolean,
+    loading: {
+      type: Boolean,
+      default: false,
+    }
   },
   computed: {
     loaded() {
@@ -34,9 +40,9 @@ export default {
     },
   },
   methods: {
-    toggle(id) {
-      this.$emit('toggle', id)
-    },
+    loadMore() {
+      this.$emit('loadMore')
+    }
   },
 }
 </script>
