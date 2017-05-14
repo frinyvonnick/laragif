@@ -14,6 +14,7 @@ import './bootstrap'
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
 new Vue({ // eslint-disable-line no-new
   el: '#app',
   components: { Application, SearchBar },

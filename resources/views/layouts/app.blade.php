@@ -18,7 +18,7 @@
     </script>
 </head>
 <body>
-    <div>
+    <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
@@ -27,12 +27,13 @@
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
+                <div class="navbar-searchbar">
+                  <search-bar :initial-search="{{ isset($search) ? json_encode($search) : "''" }}"></search-bar>
+                </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+                    <a class="navbar-brand" href="{{ url('/favorites') }}">Favorites</a>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
@@ -68,5 +69,8 @@
 
         @yield('content')
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

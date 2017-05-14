@@ -19,7 +19,7 @@ class FavoritesController extends Controller
         $this->giphy = $giphy;
     }
 
-    public function star($id)
+    public function star(string $id)
     {
         $starred = true;
         $star = Star::where('user_id', Auth::user()->id)
@@ -41,6 +41,20 @@ class FavoritesController extends Controller
         return json_encode((object)[
             'id' => $id,
             'starred' => $starred
+        ]);
+    }
+
+    public function favorites(int $offset)
+    {
+        $gifs = $this->giphy->favorites(self::LIMIT, $offset * self::LIMIT);
+        return convertToGifArray($gifs);
+    }
+
+    public function index()
+    {
+        return view('index', [
+            'endpoint' => '/api/favorites/',
+            'gifs' => convertToGifArray($this->giphy->favorites(self::LIMIT, 0))
         ]);
     }
 }
