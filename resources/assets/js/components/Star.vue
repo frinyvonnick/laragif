@@ -46,7 +46,7 @@
     },
     computed: {
       color() {
-        return this.enabled ? 'rgba(255, 255, 255, 0.5)' : '#fde579'
+        return this.enabled ? '#fde579' : 'rgba(255, 255, 255, 0.5)'
       }
     }
   }
