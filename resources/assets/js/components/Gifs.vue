@@ -26,14 +26,14 @@
     margin-left: 15px;
   }
 
+  .load-more svg {
+    width: 42px;
+    height: 42px;
+  }
+
   .load-more:disabled {
     padding: 0;
     margin: 0;
-  }
-
-  svg {
-    width: 42px;
-    height: 42px;
   }
 </style>
 
