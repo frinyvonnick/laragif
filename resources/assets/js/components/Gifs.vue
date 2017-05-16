@@ -25,11 +25,21 @@
   .load-more span {
     margin-left: 15px;
   }
+
+  .load-more svg {
+    width: 42px;
+    height: 42px;
+  }
+
+  .load-more:disabled {
+    padding: 0;
+    margin: 0;
+  }
 </style>
 
 <template>
   <div>
-    <div class="masonry-layout" v-if="loaded">
+    <div class="masonry-layout">
       <div v-for="column in columns" class="masonry-layout__panel">
         <div class="masonry-layout__panel-content">
           <gif v-for="gif in column" :key="gif.id" :id="gif.id" :src="gif.url" :starred="gif.starred"></gif>
@@ -40,8 +50,8 @@
     <div class="row">
       <div class="col-lg-12">
         <button class="btn btn-default load-more" :disabled="loading" @click="loadMore">
-          <spinner v-if="!loaded"></spinner>
-          <span>Afficher plus de gifs</span>
+          <spinner v-if="loading"></spinner>
+          <span v-else >Afficher plus de gifs</span>
         </button>
       </div>
     </div>
@@ -76,9 +86,6 @@ export default {
     }
   },
   computed: {
-    loaded() {
-      return this.gifs !== null
-    },
     columns() {
       return chunk(this.gifs, Math.floor(this.gifs.length / 4))
     }
