@@ -1,7 +1,7 @@
 <template>
   <form class="navbar-form">
     <div class="form-group">
-      <input class="form-control" type="text" name="search" v-model="sharedState.search" placeholder="Search" />
+      <input class="form-control" type="text" name="search" v-model="search" placeholder="Search" />
     </div>
   </form>
 </template>
@@ -18,16 +18,14 @@ export default {
       default: '',
     }
   },
-  beforeCreate() {
-    store.set('search', this.$options.propsData.initialSearch)
-  },
   data() {
     return {
-      sharedState: store.state
+      sharedState: store.state,
+      search: this.initialSearch
     }
   },
   watch: {
-    ['sharedState.search']: debounce(async function startSearch(newValue) {
+    search: debounce(async function startSearch(newValue) {
       if (!window.location.href.includes('search')) {
         return window.location.href = `/search/${newValue}`
       }
