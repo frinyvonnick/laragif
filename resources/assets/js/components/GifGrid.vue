@@ -89,7 +89,7 @@ export default {
   },
   computed: {
     columns() {
-      return chunk(this.gifs, Math.floor(this.gifs.length / 4))
+      return chunk(this.gifs, Math.floor(this.gifs.length / 4) || 1)
     },
   },
   methods: {
