@@ -34,9 +34,6 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-left">
                       <li>
-                        <search-bar :initial-search="{{ isset($search) ? json_encode($search) : "''" }}"></search-bar>
-                      </li>
-                      <li>
                         <a class="navbar-brand" href="{{ url('/favorites') }}">Favorites</a>
                       </li>
                     </ul>

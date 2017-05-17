@@ -13,8 +13,8 @@
 </style>
 
 <template>
-  <div class="gif-container" @click="toggleStar">
-    <star v-if="isConnected" :enabled="starred" ></star>
+  <div class="gif-container" @click="$emit('toggle')">
+    <star v-if="starVisible" :enabled="starred" ></star>
     <img :src="src" />
   </div>
 </template>
@@ -27,10 +27,6 @@ import pick from 'lodash/pick'
 export default {
   components: { Star },
   props: {
-    id: {
-      type: String,
-      required: true,
-    },
     src: {
       type: String,
       default: '',
@@ -39,25 +35,10 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  data() {
-    return pick(store.state, ['gifs', 'user'])
-  },
-  computed: {
-    isConnected() {
-      return !!this.user.id
+    starVisible: {
+      type: Boolean,
+      default: false,
     }
   },
-  methods: {
-    toggleStar() {
-      if (this.isConnected) {
-        axios.get(`/api/star/${this.id}`)
-          .then((response) => {
-            const index = this.gifs.findIndex(gif => gif.id === this.id)
-            store.set(`gifs[${index}].starred`, response.data.starred)
-          })
-      }
-    }
-  }
 }
 </script>
