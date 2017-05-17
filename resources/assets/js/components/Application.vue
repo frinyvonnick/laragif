@@ -7,7 +7,7 @@
 <template>
   <div class="application container">
     <search-bar @search="onSearch"></search-bar>
-    <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs" :connected="connected" @starChange="updateGif"></gif-grid>
+    <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs"></gif-grid>
   </div>
 </template>
 
@@ -24,10 +24,6 @@ export default {
       type: Array,
       default: () => [],
     },
-    authenticatedUser: {
-      type: Object,
-      default: () => ({}),
-    },
     initialEndpoint: {
       type: String,
       required: true,
@@ -39,11 +35,6 @@ export default {
       offset: 0,
       gifs: this.initialGifs,
       endpoint: this.initialEndpoint,
-    }
-  },
-  computed: {
-    connected() {
-      return !!this.authenticatedUser.id
     }
   },
   methods: {
@@ -68,13 +59,6 @@ export default {
 
       this.fetch(`${this.endpoint}${this.offset}`)
     },
-    updateGif(newGif) {
-      const index = this.gifs.findIndex(g => g.id === newGif.id)
-      if(index > -1) {
-        const gif = this.gifs[index]
-        this.$set(this.gifs, index, {...gif, ...newGif})
-      }
-    }
   },
 }
 </script>
