@@ -45,10 +45,13 @@
             v-for="gif in column"
             :key="gif.id"
             :src="gif.url"
+<<<<<<< 6067d2f4eba4602bf726bbd3e53eafc2bd9a9244
             :starred="gif.starred"
             :starVisible="connected"
             :title="gif.title"
             @toggle="toggleStar(gif.id)"
+=======
+>>>>>>> :hammer: Remove Star from front
           >
           </gif>
         </div>
@@ -81,18 +84,6 @@ export default {
     loading: {
       type: Boolean,
       default: false,
-    },
-    connected: {
-      type: Boolean,
-      default: false,
-    },
-    columnCount: {
-      type: Number,
-      default: 4,
-    },
-    more: {
-      type: Boolean,
-      default: true,
     }
   },
   computed: {
@@ -103,9 +94,6 @@ export default {
   methods: {
     loadMore() {
       this.$emit('loadMore')
-    },
-    toggleStar(id) {
-      const newStar = !this.gifs.find(g => g.id === id).starred
     }
   },
 }
