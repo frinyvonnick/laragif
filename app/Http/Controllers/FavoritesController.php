@@ -22,21 +22,8 @@ class FavoritesController extends Controller
     public function star(string $id)
     {
         $starred = true;
-        $star = Star::where('user_id', Auth::user()->id)
-                    ->where('gif_id', $id)
-                    ->first();
 
-        if(is_null($star)) {
-            $star = new Star([
-                'user_id' => Auth::user()->id,
-                'gif_id' => $id
-            ]);
-
-            $star->save();
-        } else {
-            $star->delete();
-            $starred = false;
-        }
+        // Etape 8
 
         return json_encode((object)[
             'id' => $id,
