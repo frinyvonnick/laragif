@@ -1,9 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-		<application
-			:initial-endpoint="{{ json_encode($endpoint) }}"
-			:initial-gifs="{{ json_encode($gifs) }}"
-		>
-		</application>
+	@foreach ($gifs as $gif)
+		<img src="{{$gif->url}}" />
+	@endforeach
 @endsection
