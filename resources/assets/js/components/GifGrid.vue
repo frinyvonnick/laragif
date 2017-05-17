@@ -98,11 +98,7 @@ export default {
     },
     toggleStar(id) {
       const newStar = !this.gifs.find(g => g.id === id).starred
-      this.$emit('starChange', {id, starred: newStar})
-      axios.get(`/api/star/${id}`)
-        .then((response) => {
-          this.$emit('starChange', {id, starred: response.data.starred})
-        })
+      
     }
   },
 }
