@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Interfaces\GiphyInterface;
 use Kozz\Laravel\Facades\Guzzle;
 use GuzzleHttp\Psr7\Response;
+use Illuminate\Support\Facades\Auth;
 use App\Star;
 
 class GiphyRepository implements GiphyInterface
@@ -39,6 +40,7 @@ class GiphyRepository implements GiphyInterface
     public function favorites(int $limit, int $offset)
     {
         $ids = Star::take($limit)
+                  ->where('user_id', Auth::user()->id)
                   ->skip($offset)
                   ->get()
                   ->implode('gif_id', ',');
