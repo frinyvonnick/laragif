@@ -13,9 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('trending/{offset}', 'TrendingController@trending');
 Route::get('search/{term}/{offset}', 'SearchController@search');
-
+ 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/star/{url}', 'FavoritesController@star');
     Route::get('/favorites/{offset}', 'FavoritesController@favorites');
