@@ -5,7 +5,6 @@ use App\Interfaces\GiphyInterface;
 use Kozz\Laravel\Facades\Guzzle;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\Auth;
-use App\Star;
 
 class GiphyRepository implements GiphyInterface
 {
@@ -35,24 +34,6 @@ class GiphyRepository implements GiphyInterface
         $response = Guzzle::get(self::GIPHY_API . '/search?api_key=' . self::API_KEY . '&q=' . $term . '&limit=' . $limit . '&offset=' . $offset);
 
         return self::extractResult($response);
-    }
-
-    public function favorites(int $limit, int $offset)
-    {
-        $ids = Star::take($limit)
-                  ->where('user_id', Auth::user()->id)
-                  ->skip($offset)
-                  ->get()
-                  ->implode('gif_id', ',');
-
-        $response = Guzzle::get(self::GIPHY_API . '?api_key=' . self::API_KEY . '&ids=' . $ids);
-
-        return self::extractResult($response);
-    }
-
-    public function findOne(string $id) {
-        $response = Guzzle::get(self::GIPHY_API . '/' . $id . '?api_key=' . self::API_KEY);
-        return self::extractOne(json_decode($response->getBody())->data);
     }
 
     private static function extractResult(Response $response)

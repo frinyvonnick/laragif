@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\GiphyInterface;
-use App\Star;
 use App\Gif;
 use App\Events\StarEvent;
 use Illuminate\Support\Facades\Auth;
