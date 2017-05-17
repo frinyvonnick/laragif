@@ -1,6 +1,5 @@
 <?php
 
-use App\Star;
 use App\Gif;
 
 function convertToGifArray($gifs)
@@ -10,13 +9,6 @@ function convertToGifArray($gifs)
         $arr[$gif->id] = $go;
         return $arr;
     }, []);
-
-    $ids = array_keys($gifById);
-
-    $stars = Star::whereIn('gif_id', $ids)->get()->each(function($star) use ($gifById){
-        $g = $gifById[$star->gif_id];
-        $g->starred = true;
-    });
 
     return array_values($gifById);
 }
