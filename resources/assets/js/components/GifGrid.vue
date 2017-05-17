@@ -42,7 +42,15 @@
     <div class="masonry-layout">
       <div v-for="column in columns" class="masonry-layout__panel">
         <div class="masonry-layout__panel-content">
-          <gif v-for="gif in column" :key="gif.id" :id="gif.id" :src="gif.url" :starred="gif.starred"></gif>
+          <gif
+            v-for="gif in column"
+            :key="gif.id"
+            :src="gif.url"
+            :starred="gif.starred"
+            :starVisible="connected"
+            @toggle="toggleStar(gif.id)"
+          >
+          </gif>
         </div>
       </div>
     </div>
@@ -57,16 +65,6 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-.gif {
-  padding: 8px;
-}
-.gifs-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-</style>
 
 <script>
 import Spinner from './Spinner.vue'
@@ -83,16 +81,28 @@ export default {
     loading: {
       type: Boolean,
       default: false,
+    },
+    connected: {
+      type: Boolean,
+      default: false,
     }
   },
   computed: {
     columns() {
       return chunk(this.gifs, Math.floor(this.gifs.length / 4))
-    }
+    },
   },
   methods: {
     loadMore() {
       this.$emit('loadMore')
+    },
+    toggleStar(id) {
+      const newStar = !this.gifs.find(g => g.id === id).starred
+      this.$emit('starChange', {id, starred: newStar})
+      axios.get(`/api/star/${id}`)
+        .then((response) => {
+          this.$emit('starChange', {id, starred: response.data.starred})
+        })
     }
   },
 }

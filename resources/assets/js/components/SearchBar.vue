@@ -1,5 +1,5 @@
 <template>
-  <form class="navbar-form">
+  <form>
     <div class="form-group">
       <input class="form-control" type="text" name="search" v-model="search" placeholder="Search" />
     </div>
@@ -25,21 +25,8 @@ export default {
     }
   },
   watch: {
-    search: debounce(async function startSearch(newValue) {
-      if (!window.location.href.includes('search')) {
-        return window.location.href = `/search/${newValue}`
-      }
-      if (newValue !== '') {
-        store.set('search', newValue)
-        store.set('offset', 0)
-
-        const endpointParts = this.sharedState.endpoint.split('/')
-        endpointParts[endpointParts.length - 2] = newValue
-        store.set('endpoint', endpointParts.join('/'))
-
-        const response = await axios.get(`${this.sharedState.endpoint}${this.sharedState.offset}`)
-        store.set('gifs', response.data)
-      }
+    search: debounce(function startSearch(newValue) {
+      this.$emit('search', newValue)
     }, 500),
   },
 }
