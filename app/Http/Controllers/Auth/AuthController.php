@@ -7,10 +7,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use Socialite;
+use Illuminate\Support\Facades\Auth;
 
 
 class AuthController extends Controller
 {
+    protected $redirectTo = '/';
+
     public function redirectToProvider($provider)
     {
         return Socialite::driver($provider)->redirect();
