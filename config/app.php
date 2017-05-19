@@ -180,6 +180,7 @@ return [
         /*
          * Custom Providers
          */
+        Laravel\Socialite\SocialiteServiceProvider::class,
         Kozz\Laravel\Providers\Guzzle::class,
         App\Providers\GiphyServiceProvider::class,
 
@@ -235,6 +236,7 @@ return [
         /*
          * Custom Facades
          */
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Guzzle' => Kozz\Laravel\Facades\Guzzle::class,
 
     ],
