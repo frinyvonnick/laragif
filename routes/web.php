@@ -11,3 +11,9 @@
 |
 */
 $gifs = json_decode(file_get_contents(base_path() . '/resources/mocks/search/cat/0.json'));
+
+Route::get('/', function() use($gifs) {
+  return view('index', [
+    'gifs' => $gifs
+  ]);
+});
