@@ -19,8 +19,8 @@ Route::get('/', function() use($gifs) {
   ]);
 });
 
-Route::get('/trending', function() use($gifs) {
-  $file = base_path() . '/resources/mocks/search/' . $term . '/' . $offset . '.json';
+Route::get('/api/trending/{offset}', function($offset) use($gifs) {
+  $file = base_path() . '/resources/mocks/trending/' . $offset . '.json';
 
   if (file_exists($file)) {
       return json_decode(file_get_contents($file));

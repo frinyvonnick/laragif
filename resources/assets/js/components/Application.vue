@@ -26,7 +26,7 @@ export default {
     },
     initialEndpoint: {
       type: String,
-      required: true,
+      default: '/api/trending/'
     }
   },
   data() {
