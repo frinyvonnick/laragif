@@ -29,5 +29,3 @@ Route::get('/trending', function() use($gifs) {
   // Fallback on first json mock if we don't find a mock file
   return $gifs;
 });
-Route::get('/search/{search}', 'SearchController@index');
-Route::middleware('auth')->get('/favorites', 'FavoritesController@index');
