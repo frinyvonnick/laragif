@@ -27,16 +27,6 @@ class GiphyServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        if (GiphyRepository::ping()) {
-            $this->app->singleton(
-                GiphyInterface::class,
-                GiphyRepository::class
-            );
-        } else {
-            $this->app->singleton(
-                GiphyInterface::class,
-                MockGiphyRepository::class
-            );
-        }
+        
     }
 }
