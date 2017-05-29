@@ -18,6 +18,7 @@
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    <script type="text/javascript" src="http://localhost:6001/socket.io/socket.io.js"></script>
 </head>
 <body>
     <div id="app">

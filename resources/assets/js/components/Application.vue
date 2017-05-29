@@ -1,13 +1,25 @@
 <style scoped>
   .application {
     padding-bottom: 15px;
+    display: flex;
+  }
+  .main-content {
+    width: 60%;
+  }
+  .sidebar {
+    width: 40%;
   }
 </style>
 
 <template>
   <div class="application container">
-    <search-bar @search="onSearch"></search-bar>
-    <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs" :connected="connected" @starChange="updateGif"></gif-grid>
+    <div class="main-content">
+      <search-bar @search="onSearch"></search-bar>
+      <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs" :connected="connected" @starChange="updateGif"></gif-grid>
+    </div>
+    <div class="sidebar">
+      <notification-pane></notification-pane>
+    </div>
   </div>
 </template>
 
@@ -16,9 +28,10 @@ import GifGrid from './GifGrid.vue'
 import Spinner from './Spinner.vue'
 import store from '../store.js'
 import SearchBar from './SearchBar.vue'
+import NotificationPane from './NotificationPane.vue'
 
 export default {
-  components: { GifGrid, Spinner, SearchBar },
+  components: { GifGrid, Spinner, SearchBar, NotificationPane },
   props: {
     initialGifs: {
       type: Array,

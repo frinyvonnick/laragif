@@ -1,5 +1,6 @@
 import Application from './components/Application.vue'
 import SearchBar from './components/SearchBar.vue'
+import Echo from 'laravel-echo'
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -15,7 +16,14 @@ import './bootstrap'
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+ window.Echo = new Echo({
+     broadcaster: 'socket.io',
+     host: '127.0.0.1:6001'
+ });
+
 new Vue({ // eslint-disable-line no-new
   el: '#app',
   components: { Application, SearchBar },
 })
+
+console.log(window.location.hostname)
