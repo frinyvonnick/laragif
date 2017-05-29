@@ -8,8 +8,8 @@
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "foo": "laravel-echo-server init",
-    "bar": "laravel-echo-server start"
+    "init-echo": "laravel-echo-server init",
+    "start-echo": "laravel-echo-server start"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
