@@ -18,12 +18,10 @@ import './bootstrap'
 
  window.Echo = new Echo({
      broadcaster: 'socket.io',
-     host: '127.0.0.1:6001'
+     host: `${window.location.hostname}:6001`
  });
 
 new Vue({ // eslint-disable-line no-new
   el: '#app',
   components: { Application, SearchBar },
 })
-
-console.log(window.location.hostname)
