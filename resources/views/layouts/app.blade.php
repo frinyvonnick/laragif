@@ -17,6 +17,7 @@
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
+        window.echoServer = '{{ env('ECHO_SERVER_HOST') . ':' . env('ECHO_SERVER_PORT') }}';
     </script>
     <script type="text/javascript" src="http://localhost:6001/socket.io/socket.io.js"></script>
 </head>
