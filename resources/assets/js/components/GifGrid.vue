@@ -1,6 +1,5 @@
 <style scoped>
   .masonry-layout {
-    column-count: 4;
     column-gap: 0;
   }
   .masonry-layout__panel {
@@ -39,7 +38,7 @@
 
 <template>
   <div>
-    <div class="masonry-layout">
+    <div class="masonry-layout" :style="{columnCount: this.columnCount}">
       <div v-for="column in columns" class="masonry-layout__panel">
         <div class="masonry-layout__panel-content">
           <gif
@@ -48,6 +47,7 @@
             :src="gif.url"
             :starred="gif.starred"
             :starVisible="connected"
+            :title="gif.title"
             @toggle="toggleStar(gif.id)"
           >
           </gif>
@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <div class="row" v-if="more">
       <div class="col-lg-12">
         <button class="btn btn-default load-more" :disabled="loading" @click="loadMore">
           <spinner v-if="loading"></spinner>
@@ -85,11 +85,19 @@ export default {
     connected: {
       type: Boolean,
       default: false,
+    },
+    columnCount: {
+      type: Number,
+      default: 4,
+    },
+    more: {
+      type: Boolean,
+      default: true,
     }
   },
   computed: {
     columns() {
-      return chunk(this.gifs, Math.floor(this.gifs.length / 4) || 1)
+      return chunk(this.gifs, Math.floor(this.gifs.length / this.columnCount) || 1)
     },
   },
   methods: {

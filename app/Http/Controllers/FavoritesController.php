@@ -36,7 +36,7 @@ class FavoritesController extends Controller
             $star->save();
 
             $gif = $this->giphy->findOne($id);
-            $event = new StarEvent($gif->url, Auth::user()->name);
+            $event = new StarEvent($gif->url, Auth::user()->name, $id);
             broadcast($event)->toOthers();
         } else {
             $star->delete();
@@ -53,6 +53,15 @@ class FavoritesController extends Controller
     {
         $gifs = $this->giphy->favorites(self::LIMIT, $offset * self::LIMIT);
         return convertToGifArray($gifs);
+    }
+
+    public function isStarred(string $id) {
+        $starred = !is_null(Star::where('user_id', Auth::user()->id)
+                    ->where('gif_id', $id)
+                    ->first());
+        return json_encode((object)[
+            'starred' => $starred
+        ]);
     }
 
     public function index()

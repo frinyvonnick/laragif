@@ -9,7 +9,10 @@
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "init-echo": "laravel-echo-server init",
-    "start-echo": "laravel-echo-server start"
+    "start-echo": "laravel-echo-server start",
+    "start-server": "php artisan serve --port=81",
+    "start-redis": "redis-server",
+    "start-queue": "php artisan queue:work"
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.23.0",

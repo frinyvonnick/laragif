@@ -19,4 +19,5 @@ Route::get('search/{term}/{offset}', 'SearchController@search');
 Route::group(['middleware' => ['auth']], function () {
     Route::put('/star/{url}', 'FavoritesController@star');
     Route::get('/favorites/{offset}', 'FavoritesController@favorites');
+    Route::get('/star/{id}', 'FavoritesController@isStarred');
 });
