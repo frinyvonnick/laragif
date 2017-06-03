@@ -14,7 +14,7 @@
 <template>
   <div class="application container">
     <div class="main-content">
-      <search-bar @search="onSearch"></search-bar>
+      <search-bar @search="onSearch" :initialSearch="initialSearch"></search-bar>
       <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs" :connected="connected" @starChange="updateGif"></gif-grid>
     </div>
     <div class="sidebar">
@@ -52,6 +52,7 @@ export default {
       gifs: this.initialGifs,
       endpoint: this.initialEndpoint,
       notifications: [],
+      initialSearch: window.location.href.split('search/')[1] || ''
     }
   },
   computed: {
@@ -85,14 +86,10 @@ export default {
       this.fetch(`${this.endpoint}${this.offset}`)
     },
     onSearch(searchValue) {
-      if (!window.location.href.includes('search')) {
-        return window.location.href = `/search/${searchValue}`
-      }
+      window.history.pushState({}, '', `/search/${searchValue}`)
+      this.endpoint = `/api/search/${searchValue}/`
       this.offset = 0
-      const endpointParts = this.endpoint.split('/')
-      endpointParts[endpointParts.length - 2] = searchValue
-      this.endpoint = endpointParts.join('/')
-
+      this.gifs = []
       this.fetch(`${this.endpoint}${this.offset}`)
     },
     updateGif(newGif) {
