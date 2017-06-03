@@ -12,4 +12,5 @@ Homestead.yaml
 /public/js
 /public/css
 /public/fonts
+/public/mix-manifest.json
 dump.rdb
