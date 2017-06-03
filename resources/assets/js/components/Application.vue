@@ -60,7 +60,12 @@ export default {
       return !!this.authenticatedUser.id
     }
   },
-  // LIVECODE HERE
+  mounted() {
+    window.Echo.channel('everyone')
+    .listen('StarEvent', (gif) => {
+      this.notifications.push({url: gif.url, title: `Starred by ${gif.user}`})
+    })
+  },
   methods: {
     async fetch(url) {
       this.loading = true

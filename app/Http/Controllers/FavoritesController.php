@@ -35,8 +35,9 @@ class FavoritesController extends Controller
 
             $star->save();
 
-            // LIVECODE HERE
-
+            $gif = $this->giphy->findOne($id);
+            $event = new StarEvent($gif->url, Auth::user()->name, $id);
+            broadcast($event)->toOthers();
         } else {
             $star->delete();
             $starred = false;
