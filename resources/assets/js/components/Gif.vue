@@ -16,6 +16,7 @@
   <div class="gif-container" @click="$emit('toggle')">
     <star v-if="starVisible" :enabled="starred" ></star>
     <img :src="src" />
+    <span v-if="title">{{title}}</span>
   </div>
 </template>
 
@@ -38,6 +39,10 @@ export default {
     starVisible: {
       type: Boolean,
       default: false,
+    },
+    title: {
+      type: String,
+      default: '',
     }
   },
 }

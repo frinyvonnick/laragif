@@ -34,4 +34,8 @@ class MockGiphyRepository implements GiphyInterface
     {
 
     }
+
+    public function findOne(string $id) {
+      
+    }
 }
