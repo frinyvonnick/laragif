@@ -50,15 +50,22 @@ class GiphyRepository implements GiphyInterface
         return self::extractResult($response);
     }
 
+    public function findOne(string $id) {
+        $response = Guzzle::get(self::GIPHY_API . '/' . $id . '?api_key=' . self::API_KEY);
+        return self::extractOne(json_decode($response->getBody())->data);
+    }
+
     private static function extractResult(Response $response)
     {
         $data = json_decode($response->getBody())->data;
 
-        return array_map(function(\stdClass $datum) {
-          return (object)[
-              'id' => $datum->id,
-              'url' => $datum->images->fixed_width->url
-          ];
-        }, $data);
+        return array_map('self::extractOne', $data);
+    }
+
+    private static function extractOne(\stdClass $datum) {
+        return (object)[
+            'id' => $datum->id,
+            'url' => $datum->images->fixed_width->url
+        ];
     }
 }

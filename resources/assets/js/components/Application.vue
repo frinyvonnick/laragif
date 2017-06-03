@@ -1,13 +1,25 @@
 <style scoped>
   .application {
     padding-bottom: 15px;
+    display: flex;
+  }
+  .main-content {
+    width: 60%;
+  }
+  .sidebar {
+    width: 40%;
   }
 </style>
 
 <template>
   <div class="application container">
-    <search-bar @search="onSearch"></search-bar>
-    <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs" :connected="connected" @starChange="updateGif"></gif-grid>
+    <div class="main-content">
+      <search-bar @search="onSearch" :initialSearch="initialSearch"></search-bar>
+      <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs" :connected="connected" @starChange="updateGif"></gif-grid>
+    </div>
+    <div class="sidebar">
+      <gif-grid :more="false" :gifs="notifications" :connected="connected" @starChange="updateGif" :columnCount="1"></gif-grid>
+    </div>
   </div>
 </template>
 
@@ -39,12 +51,28 @@ export default {
       offset: 0,
       gifs: this.initialGifs,
       endpoint: this.initialEndpoint,
+      notifications: [],
+      initialSearch: window.location.href.split('search/')[1] || ''
     }
   },
   computed: {
     connected() {
       return !!this.authenticatedUser.id
     }
+  },
+  mounted() {
+    window.Echo.channel('everyone')
+      .listen('StarEvent', ({url, user, id}) => {
+        const gif = {url, title: `starred by ${user}`, id}
+        if(this.connected) {
+          axios.get(`/api/star/${id}`)
+            .then(result => {
+              this.notifications.push({...gif, starred: result.data.starred})
+            })
+        } else {
+          this.notifications.push(gif)
+        }
+      });
   },
   methods: {
     async fetch(url) {
@@ -58,21 +86,21 @@ export default {
       this.fetch(`${this.endpoint}${this.offset}`)
     },
     onSearch(searchValue) {
-      if (!window.location.href.includes('search')) {
-        return window.location.href = `/search/${searchValue}`
-      }
+      window.history.pushState({}, '', `/search/${searchValue}`)
+      this.endpoint = `/api/search/${searchValue}/`
       this.offset = 0
-      const endpointParts = this.endpoint.split('/')
-      endpointParts[endpointParts.length - 2] = searchValue
-      this.endpoint = endpointParts.join('/')
-
+      this.gifs = []
       this.fetch(`${this.endpoint}${this.offset}`)
     },
     updateGif(newGif) {
-      const index = this.gifs.findIndex(g => g.id === newGif.id)
+      this.updateGifInArray(newGif, this.gifs)
+      this.updateGifInArray(newGif, this.notifications)
+    },
+    updateGifInArray(newGif, array) {
+      const index = array.findIndex(g => g.id === newGif.id)
       if(index > -1) {
-        const gif = this.gifs[index]
-        this.$set(this.gifs, index, {...gif, ...newGif})
+        const gif = array[index]
+        this.$set(array, index, {...gif, ...newGif})
       }
     }
   },

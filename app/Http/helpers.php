@@ -2,6 +2,7 @@
 
 use App\Star;
 use App\Gif;
+use Illuminate\Support\Facades\Auth;
 
 function convertToGifArray($gifs)
 {
@@ -12,11 +13,12 @@ function convertToGifArray($gifs)
     }, []);
 
     $ids = array_keys($gifById);
-
-    $stars = Star::whereIn('gif_id', $ids)->get()->each(function($star) use ($gifById){
-        $g = $gifById[$star->gif_id];
-        $g->starred = true;
-    });
+    if(Auth::check()) {
+      $stars = Star::whereIn('gif_id', $ids)->where('user_id', Auth::user()->id)->get()->each(function($star) use ($gifById){
+          $g = $gifById[$star->gif_id];
+          $g->starred = true;
+      });
+    }
 
     return array_values($gifById);
 }

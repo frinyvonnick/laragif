@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Interfaces\GiphyInterface;
 use App\Star;
 use App\Gif;
+use App\Events\StarEvent;
 use Illuminate\Support\Facades\Auth;
 
 class FavoritesController extends Controller
@@ -26,13 +27,17 @@ class FavoritesController extends Controller
                     ->where('gif_id', $id)
                     ->first();
 
-        if(is_null($star)) {
+        if (is_null($star)) {
             $star = new Star([
                 'user_id' => Auth::user()->id,
                 'gif_id' => $id
             ]);
 
             $star->save();
+
+            $gif = $this->giphy->findOne($id);
+            $event = new StarEvent($gif->url, Auth::user()->name, $id);
+            broadcast($event)->toOthers();
         } else {
             $star->delete();
             $starred = false;
@@ -48,6 +53,15 @@ class FavoritesController extends Controller
     {
         $gifs = $this->giphy->favorites(self::LIMIT, $offset * self::LIMIT);
         return convertToGifArray($gifs);
+    }
+
+    public function isStarred(string $id) {
+        $starred = !is_null(Star::where('user_id', Auth::user()->id)
+                    ->where('gif_id', $id)
+                    ->first());
+        return json_encode((object)[
+            'starred' => $starred
+        ]);
     }
 
     public function index()
