@@ -16,3 +16,5 @@ Route::get('/search/{search}', 'SearchController@index');
 Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');
 Route::middleware('auth')->get('/favorites', 'FavoritesController@index');
+
+Auth::routes();
