@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-	@foreach ($gifs as $gif)
-		<img src="{{$gif->url}}" />
-	@endforeach
+	<application :gifs="{{json_encode($gifs)}}" />
 @endsection
