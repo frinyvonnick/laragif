@@ -6,7 +6,6 @@
 
 <template>
   <div class="application container">
-    <search-bar @search="onSearch"></search-bar>
     <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs"></gif-grid>
   </div>
 </template>
