@@ -4,17 +4,16 @@
     display: flex;
   }
   .main-content {
-    width: 60%;
-  }
-  .sidebar {
-    width: 40%;
+    width: 100%;
   }
 </style>
 
 <template>
   <div class="application container">
-    <search-bar @search="onSearch"></search-bar>
-    <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs"></gif-grid>
+    <div class="main-content">
+      <search-bar @search="onSearch"></search-bar>
+      <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs"></gif-grid>
+    </div>
   </div>
 </template>
 

@@ -38,20 +38,13 @@
 
 <template>
   <div>
-    <div class="masonry-layout" :style="{columnCount: this.columnCount}">
+    <div class="masonry-layout" :style="{columnCount: 4}">
       <div v-for="column in columns" class="masonry-layout__panel">
         <div class="masonry-layout__panel-content">
           <gif
             v-for="gif in column"
             :key="gif.id"
             :src="gif.url"
-<<<<<<< 6067d2f4eba4602bf726bbd3e53eafc2bd9a9244
-            :starred="gif.starred"
-            :starVisible="connected"
-            :title="gif.title"
-            @toggle="toggleStar(gif.id)"
-=======
->>>>>>> :hammer: Remove Star from front
           >
           </gif>
         </div>
@@ -84,6 +77,10 @@ export default {
     loading: {
       type: Boolean,
       default: false,
+    },
+    more: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {

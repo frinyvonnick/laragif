@@ -11,7 +11,6 @@
 <template>
   <div class="gif-container">
     <img :src="src" />
-    <span v-if="title">{{title}}</span>
   </div>
 </template>
 
