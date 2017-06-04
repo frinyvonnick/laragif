@@ -4,10 +4,7 @@
     display: flex;
   }
   .main-content {
-    width: 60%;
-  }
-  .sidebar {
-    width: 40%;
+    width: 100%;
   }
 </style>
 
@@ -16,9 +13,6 @@
     <div class="main-content">
       <search-bar @search="onSearch" :initialSearch="initialSearch"></search-bar>
       <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs" :connected="connected" @starChange="updateGif"></gif-grid>
-    </div>
-    <div class="sidebar">
-      <gif-grid :more="false" :gifs="notifications" :connected="connected" @starChange="updateGif" :columnCount="1"></gif-grid>
     </div>
   </div>
 </template>
