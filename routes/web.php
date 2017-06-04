@@ -11,8 +11,6 @@
 |
 */
 
-Auth::routes();
-
 Route::get('/', 'TrendingController@index');
 Route::get('/search/{search}', 'SearchController@index');
 Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');

@@ -12,7 +12,7 @@
   <div class="application container">
     <div class="main-content">
       <search-bar @search="onSearch" :initialSearch="initialSearch"></search-bar>
-      <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs" :connected="connected" @starChange="updateGif"></gif-grid>
+      <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs"></gif-grid>
     </div>
   </div>
 </template>
@@ -54,20 +54,6 @@ export default {
       return !!this.authenticatedUser.id
     }
   },
-  mounted() {
-    window.Echo.channel('everyone')
-      .listen('StarEvent', ({url, user, id}) => {
-        const gif = {url, title: `starred by ${user}`, id}
-        if(this.connected) {
-          axios.get(`/api/star/${id}`)
-            .then(result => {
-              this.notifications.push({...gif, starred: result.data.starred})
-            })
-        } else {
-          this.notifications.push(gif)
-        }
-      });
-  },
   methods: {
     async fetch(url) {
       this.loading = true
@@ -86,17 +72,6 @@ export default {
       this.gifs = []
       this.fetch(`${this.endpoint}${this.offset}`)
     },
-    updateGif(newGif) {
-      this.updateGifInArray(newGif, this.gifs)
-      this.updateGifInArray(newGif, this.notifications)
-    },
-    updateGifInArray(newGif, array) {
-      const index = array.findIndex(g => g.id === newGif.id)
-      if(index > -1) {
-        const gif = array[index]
-        this.$set(array, index, {...gif, ...newGif})
-      }
-    }
   },
 }
 </script>

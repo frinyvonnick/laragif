@@ -45,10 +45,7 @@
             v-for="gif in column"
             :key="gif.id"
             :src="gif.url"
-            :starred="gif.starred"
-            :starVisible="connected"
             :title="gif.title"
-            @toggle="toggleStar(gif.id)"
           >
           </gif>
         </div>
@@ -104,14 +101,6 @@ export default {
     loadMore() {
       this.$emit('loadMore')
     },
-    toggleStar(id) {
-      const newStar = !this.gifs.find(g => g.id === id).starred
-      this.$emit('starChange', {id, starred: newStar})
-      axios.put(`/api/star/${id}`)
-        .then((response) => {
-          this.$emit('starChange', {id, starred: response.data.starred})
-        })
-    }
   },
 }
 </script>
