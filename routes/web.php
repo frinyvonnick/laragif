@@ -18,14 +18,3 @@ Route::get('/', function() use($gifs) {
     'gifs' => $gifs
   ]);
 });
-
-Route::get('/api/trending/{offset}', function($offset) use($gifs) {
-  $file = base_path() . '/resources/mocks/trending/' . $offset . '.json';
-
-  if (file_exists($file)) {
-      return json_decode(file_get_contents($file));
-  }
-
-  // Fallback on first json mock if we don't find a mock file
-  return $gifs;
-});
