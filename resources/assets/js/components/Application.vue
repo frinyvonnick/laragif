@@ -6,7 +6,7 @@
 
 <template>
   <div class="application container">
-    <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs"></gif-grid>
+    <gif-grid :gifs="gifs"></gif-grid>
   </div>
 </template>
 
@@ -42,10 +42,6 @@ export default {
       const response = await axios.get(url)
       this.loading = false
       this.gifs = [...this.gifs, ...response.data]
-    },
-    onLoadMore() {
-      this.offset += 1
-      this.fetch(`${this.endpoint}${this.offset}`)
     },
     onSearch(searchValue) {
       if (!window.location.href.includes('search')) {

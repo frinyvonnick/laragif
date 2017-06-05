@@ -13,5 +13,3 @@
 $gifs = json_decode(file_get_contents(base_path() . '/resources/mocks/search/cat/0.json'));
 
 Route::get('/', 'TrendingController@index');
-
-Route::get('/api/trending/{offset}', 'TrendingController@trending');

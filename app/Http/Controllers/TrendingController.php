@@ -13,13 +13,7 @@ class TrendingController extends Controller
   {
       $this->giphy = $giphy;
   }
-
-  public function trending(int $offset)
-  {
-    $gifs = $this->giphy->trending(20, $offset * 20);
-    return convertToGifArray($gifs);
-  }
-
+  
   public function index()
   {
     return view('index', [
