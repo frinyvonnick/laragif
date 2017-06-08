@@ -1,6 +1,31 @@
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
+$primary-color-dark:   #1976D2;
+$primary-color:        #2196F3;
+$primary-color-light:  #BBDEFB;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #FFC107;
+$primary-text-color:   #212121;
+$secondary-text-color: #757575;
+$divider-color:        #BDBDBD;
+
+$gray-base: $primary-text-color !default;
+
+$navbar-default-color: $primary-color-text;
+$navbar-default-bg: $primary-color-dark;
+
+$navbar-default-brand-color: $primary-color-text;
+$navbar-default-link-color: $primary-color-text;
+$navbar-default-color: $primary-color-text;
+$navbar-default-brand-hover-color: $primary-color-light;
+$navbar-default-link-hover-color: $primary-color-light;
+$navbar-default-link-active-color: $primary-color-light;
+
+$btn-default-color: $primary-color-text;
+$btn-default-bg: $primary-color-dark;
+$btn-default-border: $primary-color;
+
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
@@ -12,8 +37,47 @@ body {
   position: fixed;
   width: 100%;
   box-shadow: 0px 6px 10px rgba(0, 0, 0, .1);
+
+  svg {
+    width: auto;
+  }
 }
 
 .content {
   padding-top: 70px;
+}
+
+.sidebar .gif-container {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-between;
+}
+.sidebar .star-container {
+  right: auto;
+  left: 165px;
+}
+.sidebar img {
+  align-self: flex-start;
+  max-width: 200px;
+}
+.sidebar span {
+  font-size: 20px;
+  font-weight: 300;
+  text-align: center;
+  align-self: center;
+}
+
+.sidebar {
+  box-sizing: border-box;
+  margin-left: 30px;
+  padding: 15px;
+  background-color: white;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.1);
+}
+.sidebar h4 {
+  margin: 0 0 15px;
+}
+.sidebar-gifs-wrapper {
+  overflow-y: auto;
+  max-height: 100%;
 }
