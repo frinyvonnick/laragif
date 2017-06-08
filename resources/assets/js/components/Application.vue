@@ -18,7 +18,10 @@
       <gif-grid @loadMore="onLoadMore" :loading="loading" :gifs="gifs" :connected="connected" @starChange="updateGif"></gif-grid>
     </div>
     <div class="sidebar">
-      <gif-grid :more="false" :gifs="notifications" :connected="connected" @starChange="updateGif" :columnCount="1"></gif-grid>
+      <h4>Notifications</h4>
+      <div class="sidebar-gifs-wrapper">
+        <gif-grid :more="false" :gifs="notifications" :connected="connected" @starChange="updateGif" :columnCount="1"></gif-grid>
+      </div>
     </div>
   </div>
 </template>
