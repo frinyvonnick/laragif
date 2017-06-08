@@ -10,13 +10,17 @@
   .star {
     align-self: center;
   }
+
+  .gif-title {
+    text-align: center;
+  }
 </style>
 
 <template>
   <div class="gif-container" @click="$emit('toggle')">
     <star v-if="starVisible" :enabled="starred" ></star>
     <img :src="src" />
-    <span v-if="title">{{title}}</span>
+    <span class="gif-title" v-if="title">{{title}}</span>
   </div>
 </template>
 
