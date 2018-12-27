@@ -1,4 +1,4 @@
-const { mix } = require('laravel-mix');
+const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -12,4 +12,5 @@ const { mix } = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+// see https://github.com/JeffreyWay/laravel-mix/issues/1846#issuecomment-446723800
+  .sass('resources/assets/sass/app.scss', 'public/css', { implementation: require('node-sass') });
